@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-h$$^224(@wre@*+^_+1-yqnergs%52-6vzeeywmgcq2gm-c0hd"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = strtobool(os.environ.get("DEBUG", None))
+DEBUG = strtobool(os.environ.get("DEBUG", "true"))
 
-ALLOWED_HOSTS = ["django-graphql-benchmark.herokuapp.com"]
+ALLOWED_HOSTS = ["django-graphql-benchmark.herokuapp.com", "localhost"]
 
 
 # Application definition
