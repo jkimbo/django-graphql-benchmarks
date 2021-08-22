@@ -8,7 +8,7 @@ authors = ["Jonathan Kim <jkimbo@gmail.com>"]
 python = ">=3.7,<3.10"
 requests = "^2.26.0"
 Django = "^3.2.6"
-strawberry-graphql = "^0.72.1"
+strawberry-graphql = "^0.72.3"
 graphene = "3.0.0b7"
 djangorestframework = "^3.12.4"
 graphene-django = "3.0.0b7"
