@@ -11,6 +11,7 @@ Django = "^3.2.6"
 strawberry-graphql = "^0.72.1"
 graphene = "3.0.0b7"
 djangorestframework = "^3.12.4"
+graphene-django = "3.0.0b7"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"
