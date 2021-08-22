@@ -33,13 +33,13 @@ class Movie(graphene.ObjectType):
         self._instance = _instance
         return super().__init__(**kwargs)
 
-    def resolve_director(self):
-        return Director.from_instance(self.instance.director)
+    def resolve_director(self, info):
+        return Director.from_instance(self._instance.director)
 
     @classmethod
     def from_instance(cls, instance):
         return cls(
-            instance=instance,
+            _instance=instance,
             id=instance.id,
             imdb_id=instance.imdb_id,
             title=instance.title,
@@ -53,7 +53,7 @@ class Movie(graphene.ObjectType):
 class Query(graphene.ObjectType):
     top_250 = graphene.List(Movie)
 
-    def resolve_top_250(self):
+    def resolve_top_250(self, info):
         movies = get_all_movies()
         return [Movie.from_instance(movie) for movie in movies]
 
