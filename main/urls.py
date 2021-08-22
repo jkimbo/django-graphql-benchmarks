@@ -8,6 +8,7 @@ from rest_framework import routers
 from strawberry_api.schema import schema as strawberry_schema
 from graphene_api.schema import schema as graphene_schema
 from drf_api.serializers import MovieViewSet
+from json_api.views import top_250
 
 
 router = routers.DefaultRouter()
@@ -20,4 +21,5 @@ urlpatterns = [
         "graphene-graphql", GrapheneView.as_view(schema=graphene_schema, graphiql=True)
     ),
     path("drf-api/", include(router.urls)),
+    path("json-api/top-250", top_250),
 ]
