@@ -19,7 +19,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("strawberry-graphql/", StrawberryView.as_view(schema=strawberry_schema)),
     path(
-        "graphene-graphql",
+        "graphene-graphql/",
         csrf_exempt(GrapheneView.as_view(schema=graphene_schema, graphiql=True)),
     ),
     path("drf-api/", include(router.urls)),
