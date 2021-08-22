@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from distutils.util import strtobool
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-h$$^224(@wre@*+^_+1-yqnergs%52-6vzeeywmgcq2gm-c0hd"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = strtobool(os.environ.get("DEBUG", None))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["django-graphql-benchmark.herokuapp.com"]
 
 
 # Application definition
