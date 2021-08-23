@@ -7,7 +7,7 @@ from graphene_django.views import GraphQLView as GrapheneView
 from rest_framework import routers
 
 from strawberry_api.schema import schema as strawberry_schema
-from strawberry_api.views import NoValidateView
+from strawberry_dict_api.schema import schema as strawberry_dict_schema
 from graphene_api.schema import schema as graphene_schema
 from drf_api.serializers import MovieViewSet
 from json_api.views import top_250
@@ -20,8 +20,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("strawberry-graphql/", StrawberryView.as_view(schema=strawberry_schema)),
     path(
-        "strawberry-graphql-no-validate/",
-        NoValidateView.as_view(schema=strawberry_schema),
+        "strawberry-graphql-dict/",
+        StrawberryView.as_view(schema=strawberry_dict_schema),
     ),
     path(
         "graphene-graphql/",
