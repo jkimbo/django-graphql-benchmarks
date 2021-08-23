@@ -5,11 +5,11 @@ export let options = {
   stages: [
     {
       duration: "5s",
-      target: 20
+      target: 10
     },
     {
       duration: "10s",
-      target: 20
+      target: 10
     }
   ]
 };
