@@ -4,9 +4,37 @@ from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 
+colors = [
+    "#636EFA",
+    "#EF553B",
+    "#00CC96",
+    "#AB63FA",
+    "#FFA15A",
+    "#19D3F3",
+    "#FF6692",
+    "#B6E880",
+    "#FF97FF",
+    "#FECB52",
+]
+
 
 def get_data(results, fn):
     all_servers = {result["api_name"]: True for result in results}.keys()
+
+    api_names = [result["api_name"] for result in results]
+    query_results = [result["results"] for result in results]
+
+    return [
+        {
+            "x": api_names,
+            "y": list(map(fn, query_results)),
+            "type": "bar",
+            "name": api_names,
+            "marker": {
+                "color": colors,
+            },
+        }
+    ]
 
     # print(program_rps_map)
     ys = []
@@ -71,12 +99,6 @@ app = dash.Dash()
 
 app.layout = html.Div(
     children=[
-        # html.Label('Benchmark'),
-        # dcc.Dropdown(
-        #     id='benchmark-index',
-        #     options=[{'label': query_name, 'value': query_name} for query_name in all_queries],
-        #     value=next(iter(all_queries))
-        # ),
         html.Label("Response time metric"),
         dcc.Dropdown(
             id="response-time-metric",
@@ -88,7 +110,6 @@ app.layout = html.Div(
                 {"label": "Max", "value": "MAX"},
                 {"label": "Average", "value": "AVG"},
                 {"label": "Mean", "value": "MEAN"},
-                # {'label': 'Errors', 'value': 'ERRORS'},
             ],
             value="P99",
         ),
@@ -106,13 +127,12 @@ app.layout = html.Div(
     ],
 )
 def updateGraph(yMetric):
-    # print(bench_results)
     figure = {
         "data": get_data(bench_results, get_ymetric_fn(yMetric, on="latency")),
         "layout": {
             "yaxis": {"title": "Response time ({}) in ms".format(yMetric)},
-            "xaxis": {"title": "API"},
-            "title": "Response time vs Query by API",
+            "xaxis": {"title": "API", "categoryorder": "total descending"},
+            "title": "Response time by API",
         },
     }
     return figure
@@ -131,8 +151,8 @@ def updateGraph2(yMetric):
         "data": get_data(bench_results, get_ymetric_fn(yMetric, on="requests")),
         "layout": {
             "yaxis": {"title": "Requests/s ({})".format(yMetric)},
-            "xaxis": {"title": "API"},
-            "title": "Reqs/s vs Query by API",
+            "xaxis": {"title": "API", "categoryorder": "total descending"},
+            "title": "Reqs/s by API",
         },
     }
     return figure
